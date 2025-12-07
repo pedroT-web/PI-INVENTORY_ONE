@@ -27,3 +27,9 @@
     border-radius: 50px;
     width: 100%;
 }
+
+.formColor{
+    /* background-color: #2f4e7c21 !important; */
+    border-color: #2F4E7C !important;
+    color: #2F4E7C !important;
+}
