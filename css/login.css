@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.ttf');
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .text-azul-petroleo{
     color: #2F4E7C;
 }
@@ -33,3 +42,9 @@
     border-color: #2F4E7C !important;
     color: #2F4E7C !important;
 }
+
+.formulario-login{
+    width: 100%;
+    max-width: 420px;
+}
+
