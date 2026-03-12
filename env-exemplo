@@ -1,4 +1,5 @@
-HOST=
-USER=
-PASSWORD=
-PORT=
+HOST=teste
+USER=teste
+PASSWORD=daisoda
+PORT=@(U$)
+DATABASE=PEDRO
