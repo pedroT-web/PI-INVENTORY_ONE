@@ -44,11 +44,13 @@
                             Pessoas</a>
                     </div>
                     <div class="text-start w-75">
-                        <a class="botao_navegar botao_selecionado" href="./inventario.html"><i class="bi bi-table icone_navegacao"></i>
+                        <a class="botao_navegar botao_selecionado" href="./inventario.html"><i
+                                class="bi bi-table icone_navegacao"></i>
                             Inventário</a>
                     </div>
                 </div>
             </section>
+
             <section class="conteudo_principal col-10">
                 <div class="row px-3 ">
                     <div class="container_pesquisa sombra">
@@ -176,64 +178,101 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body px-4">
+                            <h6 class="fw-semibold text-primary mb-3">Informações da Pessoa</h6>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <label class="form-label">Nome da Pessoa</label>
+                                    <input type="text" class="form-control" value="Murilo Brevagneli" disabled
+                                        id="nomeInventario">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Telefone</label>
+                                    <input type="text" class="form-control" value="19987635221" disabled
+                                        id="telefoneInventario">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label">Empresa</label>
+                                    <input type="text" class="form-control" value="Pulmer" disabled
+                                        id="empresaInventario">
+                                </div>
+                            </div>
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-6 ">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="text" class="form-control" value="Murilo@gmail.com" disabled id="emailInventario">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Departamento</label>
+                                    <input type="text" class="form-control" value="TI" disabled id="departamentoInventario">
+                                </div>
+                            </div>
                             <h6 class="fw-semibold text-primary mb-3">Informações do Produto</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-4">
                                     <label class="form-label">Produto</label>
-                                    <input type="text" class="form-control" value="Smartphone Samsung" disabled>
+                                    <input type="text" class="form-control" value="Smartphone Samsung" disabled
+                                        id="produtoInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">IMEI</label>
-                                    <input type="text" class="form-control" value="356789012345678" disabled>
+                                    <input type="text" class="form-control" value="356789012345678" disabled
+                                        id="imeiInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Documento NF</label>
-                                    <input type="text" class="form-control" value="000123" disabled>
+                                    <input type="text" class="form-control" value="000123" disabled
+                                        id="documentoNfInventario">
                                 </div>
                             </div>
                             <h6 class="fw-semibold text-primary mb-3">Detalhes Técnicos</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-4">
                                     <label class="form-label">Modelo</label>
-                                    <input type="text" class="form-control" value="Galaxy S23" disabled>
+                                    <input type="text" class="form-control" value="Galaxy S23" disabled
+                                        id="detalhesTecnicosInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">EAN ou Nº de Fábrica</label>
-                                    <input type="text" class="form-control" value="FAB-00123" disabled>
+                                    <input type="text" class="form-control" value="FAB-00123" disabled
+                                        id="eanInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Marca</label>
-                                    <input type="text" class="form-control" value="Samsung" disabled>
+                                    <input type="text" class="form-control" value="Samsung" disabled
+                                        id="marcaInventario">
                                 </div>
                             </div>
                             <h6 class="fw-semibold text-primary mb-3">Responsável</h6>
                             <div class="row g-3 mb-4">
                                 <div class="col-md-6">
                                     <label class="form-label">TI / Supervisor</label>
-                                    <input type="text" class="form-control" value="João Silva" disabled>
+                                    <input type="text" class="form-control" value="João Silva" disabled
+                                        id="responsavelInventario">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Configuração</label>
-                                    <input type="text" class="form-control" value="8GB RAM / SSD 256GB" disabled>
+                                    <input type="text" class="form-control" value="8GB RAM / SSD 256GB" disabled
+                                        id="configuracaoInventario">
                                 </div>
                             </div>
                             <h6 class="fw-semibold text-primary mb-3">Dados da Compra</h6>
                             <div class="row g-3 mb-3">
                                 <div class="col-md-4">
                                     <label class="form-label">Data da Compra</label>
-                                    <input type="text" class="form-control" value="10/01/2026" disabled>
+                                    <input type="text" class="form-control" value="10/01/2026" disabled
+                                        id="dataCompraInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Número de Série</label>
-                                    <input type="text" class="form-control" value="SN-987654321" disabled>
+                                    <input type="text" class="form-control" value="SN-987654321" disabled
+                                        id="numeroSerieInventario">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Valor da Compra</label>
-                                    <input type="text" class="form-control" value="R$ 3.500,00" disabled>
+                                    <input type="text" class="form-control" value="R$ 3.500,00" disabled
+                                        id="valorCompraInventario">
                                 </div>
                             </div>
-                            <h6 class="fw-semibold text-primary mb-3">Status do Produto</h6>
-                            <span class="badge bg-success fs-6">Disponível</span>
                         </div>
                         <div class="modal-footer border-0">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">

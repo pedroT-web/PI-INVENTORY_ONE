@@ -45,12 +45,12 @@
                             Pessoas</a>
                     </div>
                     <div class="text-start w-75">
-                        <a class="botao_navegar" href="./inventario.html"><i
-                                class="bi bi-table icone_navegacao"></i>
+                        <a class="botao_navegar" href="./inventario.html"><i class="bi bi-table icone_navegacao"></i>
                             Inventário</a>
                     </div>
                 </div>
             </section>
+
             <section class="conteudo_principal col-10 d-flex flex-column gap-3">
                 <div class="row px-3 ">
                     <div class="container_pesquisa sombra">
@@ -90,7 +90,7 @@
                                 <th scope="col"><i class="bi bi-123 text-muted"></i> Cód. Func</th>
                                 <th scope="col"><i class="bi bi-people-fill text-muted"></i> Nome</th>
                                 <th scope="col"><i class="bi bi-people-fill text-muted"></i> Endereço</th>
-                                <th scope="col"><i class="bi bi-person-vcard-fill text-muted"></i> Setor</th>
+                                <th scope="col"><i class="bi bi-person-vcard-fill text-muted"></i> Departamento</th>
                                 <th scope="col"><i class="bi bi-building-fill text-muted"></i> Empresa</th>
                                 <th scope="col"><i class="bi bi-graph-up-arrow text-muted"></i> Status</th>
                                 <th scope="col"><i class="bi bi-gear-fill text-muted"></i>Ações</th>
@@ -156,49 +156,43 @@
                         <div class="col-md-6">
                             <label class="form-label">Nome da Pessoa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="nomeFuncionario">
+                            <input type="text" class="form-control" id="cadNomePessoa">
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Endereço <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="endereco">
+                            <input type="text" class="form-control" id="cadEnderecoPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Cep <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="cep">
+                            <input type="text" class="form-control" id="cadCepPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
-                            <label class="form-label">Setor <i
+                            <label class="form-label">Departamento <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="setor">
+                            <input type="text" class="form-control" id="cadDepartamentoPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Empresa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="empresa">
-                        </div>
-
-                        <div class="col-md-4 mt-4">
-                            <label class="form-label">Status <i
-                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="status">
+                            <input type="text" class="form-control" id="cadFilialPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Data de Nascimento <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="date" class="form-control" id="nascimento">
+                            <input type="date" class="form-control" id="cadNascimentoPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Sexo <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <select class="form-select" id="selectSexo">
+                            <select class="form-select" id="cadSelectSexoPessoa">
                                 <option selected disabled>Selecione</option>
                                 <option value="1">Masculino</option>
                                 <option value="2">Feminino</option>
@@ -208,19 +202,19 @@
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Cargo <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="cargo">
+                            <input type="text" class="form-control" id="cadCargoPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Telefone <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="number" class="form-control" id="telefone">
+                            <input type="number" class="form-control" id="cadTelefonePessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Email<i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="cadEmailPessoa">
                         </div>
 
                     </div>
@@ -263,29 +257,73 @@
                         <div class="col-md-6">
                             <label class="form-label">Nome da Pessoa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="nomeFuncionario" value="Paulo Wesley Henrique"
-                                disabled>
+                            <input type="text" class="form-control" id="detalhesNomePesso" disabled
+                                value="Murilo Brevagneli">
                         </div>
+
                         <div class="col-md-6">
                             <label class="form-label">Endereço <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="endereco" value="Rua palmiro francisco moraes"
-                                disabled>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Setor <i
-                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="setor" value="Vendas Internas" disabled>
+                            <input type="text" class="form-control" id="detalhesEnderecoPessoa" disabled
+                                value="Rua São João Gonçalo, 192, Jd das Orquídeas">
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Cep <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="text" class="form-control" id="detalhesCepPessoa" disabled value="18297362">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Departamento <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="text" class="form-control" id="detalhesDepartamentoPessoa" disabled value="TI">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
                             <label class="form-label">Empresa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="empresa" value="AlphaTech" disabled>
+                            <input type="text" class="form-control" id="detalhesFilialPessoa" disabled value="Pulmer">
                         </div>
-                        <div class="col-md-4">
-                            <h6 class="fw-semibold text-primary mb-3">Status do Produto</h6>
-                            <span class="badge bg-success fs-6">Disponível</span>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Status <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="text" class="form-control" id="detalhesStatusPessoa" disabled
+                                value="Na empresa">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Data de Nascimento <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="text" class="form-control" id="detalhesNascimentoPessoa" disabled
+                                value="23/02/2000">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Sexo <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input class="form-control" id="detalhesSelectSexoPessoa" disabled value="Masculino">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Cargo <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="text" class="form-control" id="detalhesCargoPessoa" disabled value="Gerente">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Telefone <i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="number" class="form-control" id="detalhesTelefonePessoa" disabled
+                                value="19998472372">
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Email<i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="email" class="form-control" id="detalhesEmailPessoa" disabled
+                                value="murilo@gmail.com">
                         </div>
 
                     </div>
@@ -347,9 +385,9 @@
                         </div>
 
                         <div class="col-md-4 mt-4">
-                            <label class="form-label">Setor <i
+                            <label class="form-label">Departamento <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="editSetorPessoa">
+                            <input type="text" class="form-control" id="editDepartamentoPessoa">
                         </div>
 
                         <div class="col-md-4 mt-4">
@@ -361,7 +399,7 @@
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Status <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="status">
+                            <input type="text" class="form-control" id="editStatus">
                         </div>
 
                         <div class="col-md-4 mt-4">
