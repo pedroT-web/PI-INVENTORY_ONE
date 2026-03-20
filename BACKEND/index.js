@@ -16,6 +16,7 @@ let mysql = require('mysql')
 let conexao = mysql.createConnection({
     host: `${process.env.HOST}`,
     user: `${process.env.USER}`,
+    port:`${process.env.PORT}`,
     password: `${process.env.PASSWORD}`,
     database: `${process.env.DATABASE}`
 })
@@ -26,6 +27,17 @@ conexao.connect(function (erro) {
     } else {
         console.log("Conexão deu bom \n")
     }
+})
+
+app.post("/pessoa/", function (req, res) {
+    const data = req.body;
+    conexao.query(`INSERT INTO pessoas set ?`, [data],
+        function (erro, resultado) {
+            if (erro) {
+                res.json(erro);
+            }
+            res.send(resultado.insertId);
+        });
 })
 
 app.listen(3000)

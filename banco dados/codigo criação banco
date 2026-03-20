@@ -61,3 +61,16 @@ create or replace TABLE produtos (
     PRIMARY KEY(id)
     ) DEFAULT CHARSET = utf8
         
+    
+    Create or replace TABLE historico (
+    id INT not null auto_increment PRIMARY KEY,
+    id_pessoa int not null,
+    id_produto int not null,
+    descricao longtext,
+    datamovimentacao date,
+    movimentacao enum('entrega','devolucao'),
+    foreign key (id_pessoa) references pessoas(id),
+    foreign key (id_produto) references produtos(id)
+    ) DEFAULT CHARSET = utf8
+    
+    
