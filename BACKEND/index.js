@@ -11,23 +11,7 @@ const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-
-let mysql = require('mysql')
-let conexao = mysql.createConnection({
-    host: `${process.env.HOST}`,
-    user: `${process.env.USER}`,
-    port:`${process.env.PORT}`,
-    password: `${process.env.PASSWORD}`,
-    database: `${process.env.DATABASE}`
-})
-conexao.connect(function (erro) {
-    if (erro) {
-        console.log("Deu ruim na conexão \n");
-        throw erro;
-    } else {
-        console.log("Conexão deu bom \n")
-    }
-})
+const conexao = require("../banco dados/db") 
 
 app.post("/pessoa/", function (req, res) {
     const data = req.body;
@@ -36,8 +20,30 @@ app.post("/pessoa/", function (req, res) {
             if (erro) {
                 res.json(erro);
             }
-            res.send(resultado.insertId);
+            res.send(resultado.insertId());
         });
+})
+
+app.post("/produtos/", (req, res) => {
+    const dados = req.body
+    conexao.query("INSERT INTO produtos SET ?", [dados], (erro, resultado) => {
+        if(erro){
+            res.json(erro)
+        }
+        console.log("Deu Certo")
+        // res.send(resultado.insertId())
+    })
+})
+
+app.get("/produtos", (req, res) => {
+    conexao.query(`SELECT * FROM produtos`, (erro, listaProdutos) => {
+        if(erro){
+            console.log("Deu Errado")
+        }
+
+        res.send(listaProdutos)
+        console.log("Deu Certo")
+    })
 })
 
 app.listen(3000)

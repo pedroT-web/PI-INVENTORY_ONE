@@ -1,19 +1,65 @@
 const modal = document.getElementById('modalProduto')
-modal.addEventListener('show.bs.modal', ()=>{
+modal.addEventListener('show.bs.modal', () => {
     console.log('ola')
 })
 
 const modalDetalhes = document.getElementById('modalDetalhesProduto')
-modalDetalhes.addEventListener('show.bs.modal', ()=>{
+modalDetalhes.addEventListener('show.bs.modal', () => {
     console.log('ola')
 })
 
 const modalEditar = document.getElementById('modalEditarProduto')
-modalEditar.addEventListener('show.bs.modal', ()=>{
+modalEditar.addEventListener('show.bs.modal', () => {
     console.log('oii')
 })
 
-function fnCadastrarProduto(){
+function fnListarProdutos() {
+    fetch(`http://localhost:3000/produtos`, { method: "GET" })
+        .then(resposta => resposta.json())
+        .then((produtos) => {
+            produtos.forEach(produto => {
+                fnMontarLinhaProduto(produto)
+            })
+        })
+}
+fnListarProdutos()
+
+function fnMontarLinhaProduto(produto) {
+    let linhaProduto = `
+    <tr>
+    <td>${produto.equipamento}</td>
+    <td>${produto.imei}</td>
+    <td>${produto.nroDocumento}</td>
+    td>${produto.modelo}</td>
+    <td>${produto.imei}</td>
+    <td>${produto.serie}</td>
+    <td>${produto.dtaCompra}</td>
+    <td><span class="badge bg-success">${produto.disponivel}</span></td>
+    <td>
+                                        <div class="d-flex gap-2 justify-content-center">
+                                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#modalDetalhesProduto">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                            <button data-bs-toggle="modal" data-bs-target="#modalEditarProduto"
+                                                class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                            <button class="btn btn-secondary btn-sm">
+                                                <i class="bi bi-box-seam"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    </tr>
+    `
+
+    document.querySelector(".corpo_tabelaProdutos").innerHTML += linhaProduto
+}
+
+function fnCadastrarProduto() {
     let formProduto = {
         equipamento: document.getElementById("cadProduto").value,
         modelo: document.getElementById("cadModeloProduto").value,
@@ -21,8 +67,7 @@ function fnCadastrarProduto(){
         configuracao: document.getElementById("cadConfiguracaoProduto").value,
         serie: document.getElementById("cadNumeroSerieProduto").value,
         imei: document.getElementById("cadImeiProduto").value,
-        dataCompra: document.getElementById("cadDataCompraProduto").value,
-        dataCadastro: "calcular",
+        dtaCompra: document.getElementById("cadDataCompraProduto").value,
         valor: document.getElementById("cadValorCompraProduto").value,
         nroDocumento: document.getElementById("cadDocumentNfProduto").value,
         nroddd: document.getElementById("cadDddProduto").value,
@@ -38,36 +83,93 @@ function fnCadastrarProduto(){
     }
 
     console.dir(formProduto)
+
+    fetch(`http://localhost:3000/produtos/`, {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formProduto)
+    })
+        .then((resposta) => resposta.status)
+        .then((dados) => {
+            if (dados == 200) {
+                console.log("Produto Cadastrado Com Sucesso!!!")
+            } else if (dados == 401) {
+                console.log("Deu Errado")
+            } else {
+                console.log("Ocorreu Algum Problema Não Identificado")
+            }
+        })
 }
 
 const btnSalvar = document.getElementById("btnSalvarProduto")
-btnSalvar.addEventListener('click',() => {
+btnSalvar.addEventListener('click', () => {
     fnCadastrarProduto()
 })
 
-function fnEditarProduto(){
+function fnPreencherModalEditProdutos(produto) {
+    const equipamento = document.getElementById("editProduto").value
+    const modelo = document.getElementById("editModeloProduto").value
+    const marca = document.getElementById("editMarcaProduto").value
+    const configuracao = document.getElementById("editConfiguracaoProduto").value
+    const serie = document.getElementById("editNumSerieProduto").value
+    const imei = document.getElementById("editImeiProduto").value
+    const dtaCompra = document.getElementById("editDataCompraProduto").value
+    const dtacadastro = ""
+    const valor = document.getElementById("editValorProduto").value
+    const nrodocumento = document.getElementById("editDocumentoNfProduto").value
+    const nroddd = document.getElementById("editDddProduto").value
+    const nrolinha = document.getElementById("editLinhaProduto").value
+    const codchip = document.getElementById("editCodChipProduto").value
+    const operadora = document.getElementById("editOperadoraProduto").value
+    const pinoperadora = document.getElementById("editPinOperadoraProduto").value
+    const localestoque = document.getElementById("editLocalidadeEstoqueProduto").value
+    const responsavelestoque = document.getElementById("editResponsavelProduto").value
+    const ean = document.getElementById("editEanProduto").value
+    const alugado = document.getElementById("editAlugadoProduto").value
+    const disponivel = document.getElementById("editDisponibilidadeProduto").value
+}
+
+function fnEditarProduto() {
     let formEditProduto = {
-        equipamento: document.getElementById("").value,
-        modelo: document.getElementById("").value,
-        marca: document.getElementById("").value,
-        configuracao: document.getElementById("").value,
-        serie: document.getElementById("").value,
-        imei: document.getElementById("").value,
-        dtacompra: document.getElementById("").value,
-        dtacadastro: document.getElementById("").value,
-        valor: document.getElementById("").value,
-        nrodocument: document.getElementById("").value,
-        nroddd: document.getElementById("").value,
-        nrolinha: document.getElementById("").value,
-        codchip: document.getElementById("").value,
-        operadora: document.getElementById("").value,
-        pinoperadora: document.getElementById("").value,
-        localestoque: document.getElementById("").value,
-        responsavelestoque: document.getElementById("").value,
-        ean: document.getElementById("").value,
-        alugado: document.getElementById("").value,
-        disponivel: document.getElementById("").value
+        equipamento: document.getElementById("editProduto").value,
+        modelo: document.getElementById("editModeloProduto").value,
+        marca: document.getElementById("editMarcaProduto").value,
+        configuracao: document.getElementById("editConfiguracaoProduto").value,
+        serie: document.getElementById("editNumSerieProduto").value,
+        imei: document.getElementById("editImeiProduto").value,
+        dtacompra: document.getElementById("editDataCompraProduto").value,
+        dtacadastro: "hoje",
+        valor: document.getElementById("editValorProduto").value,
+        nrodocumento: document.getElementById("editDocumentoNfProduto").value,
+        nroddd: document.getElementById("editDddProduto").value,
+        nrolinha: document.getElementById("editLinhaProduto").value,
+        codchip: document.getElementById("editCodChipProduto").value,
+        operadora: document.getElementById("editOperadoraProduto").value,
+        pinoperadora: document.getElementById("editPinOperadoraProduto").value,
+        localestoque: document.getElementById("editLocalidadeEstoqueProduto").value,
+        responsavelestoque: document.getElementById("editResponsavelProduto").value,
+        ean: document.getElementById("editEanProduto").value,
+        alugado: document.getElementById("editAlugadoProduto").value,
+        disponivel: document.getElementById("editDisponibilidadeProduto").value
     }
 
     console.dir(formEditProduto)
+    fetch(`http://localhost:3000/produtos/`, {
+        method: "PUT",
+        headers: { 'Content-Type': "application/json" },
+        body: JSON.stringify(formEditProduto)
+    })
+        .then((resposta) => resposta.json)
+        .then((dados) => {
+
+        })
+}
+
+const btnSalvarEditProduto = document.getElementById("btnSalvarEditProduto")
+btnSalvarEditProduto.addEventListener('click', () => {
+    fnEditarProduto()
+})
+
+function fnDetalhesProduto() {
+
 }

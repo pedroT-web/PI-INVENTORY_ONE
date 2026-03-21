@@ -5,7 +5,6 @@ function fnLimparCampos() {
 
 function fnCadastrarUsuario() {
     let formCadUsuario = {
-
         nome: document.getElementById("campoNome").value,
         email: document.getElementById("campoEmail").value,
         senha: document.getElementById("campoSenha").value,

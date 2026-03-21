@@ -1,3 +1,3 @@
-function fnInveriar(){
+function fnInventariar(){
     
 }
