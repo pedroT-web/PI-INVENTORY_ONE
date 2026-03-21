@@ -19,7 +19,7 @@ function fnCadastrarPessoa() {
     }
 
       console.dir(formDados)
-      fetch('http://localhost:3000/pessoa/', {
+      fetch('http://localhost:3000/cadastropessoas/', {
         method: 'POST',
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify(formDados)
@@ -27,7 +27,7 @@ function fnCadastrarPessoa() {
         .then(resposta => resposta.status())
         .then((dados) => {
             fnLimparCampos()
-            fnMensagemSalvar()
+
             console.log(dados)
 
         })
@@ -35,7 +35,10 @@ function fnCadastrarPessoa() {
 }
 
 
-    document.getElementById("salvarPessoa").addEventListener("click",function(){
-        fnCadastrarPessoa()
-        fnLimparCampos
-    })
+
+let btn_salvar = document.getElementById("salvarPessoa")
+
+btn_salvar.addEventListener("click", function () {
+    fnCadastrarPessoa()
+
+})

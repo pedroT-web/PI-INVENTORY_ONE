@@ -12,6 +12,26 @@ function fnCadastrarUsuario() {
         telefone: document.getElementById("campoTelefone").value
     }
     console.dir(formCadUsuario)
-    fnLimparCampos()
 
+    fetch('http://localhost:3000/cadastrousuarios/', {
+        method: 'POST',
+        headers: { 'content-Type': 'application/json' },
+        body: JSON.stringify(formCadUsuario)
+    })
+          .then(resposta => resposta.status())
+        .then((dados) => {
+            fnLimparCampos()
+       
+            console.log(dados)
+
+        })
+        .catch(erro => console.log(erro.message))
 }
+
+
+let btn_salvar = document.getElementById("cadastrar")
+
+btn_salvar.addEventListener("click", function () {
+    fnCadastrarUsuario()
+
+})
