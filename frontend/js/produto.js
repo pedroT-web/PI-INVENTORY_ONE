@@ -1,19 +1,19 @@
 const modal = document.getElementById('modalProduto')
-modal.addEventListener('show.bs.modal', ()=>{
+modal.addEventListener('show.bs.modal', () => {
     console.log('ola')
 })
 
 const modalDetalhes = document.getElementById('modalDetalhesProduto')
-modalDetalhes.addEventListener('show.bs.modal', ()=>{
+modalDetalhes.addEventListener('show.bs.modal', () => {
     console.log('ola')
 })
 
 const modalEditar = document.getElementById('modalEditarProduto')
-modalEditar.addEventListener('show.bs.modal', ()=>{
+modalEditar.addEventListener('show.bs.modal', () => {
     console.log('oii')
 })
 
-function fnCadastrarProduto(){
+function fnCadastrarProduto() {
     let formProduto = {
         equipamento: document.getElementById("cadProduto").value,
         modelo: document.getElementById("cadModeloProduto").value,
@@ -21,8 +21,7 @@ function fnCadastrarProduto(){
         configuracao: document.getElementById("cadConfiguracaoProduto").value,
         serie: document.getElementById("cadNumeroSerieProduto").value,
         imei: document.getElementById("cadImeiProduto").value,
-        dataCompra: document.getElementById("cadDataCompraProduto").value,
-        dataCadastro: "calcular",
+        dtaCompra: document.getElementById("cadDataCompraProduto").value,
         valor: document.getElementById("cadValorCompraProduto").value,
         nroDocumento: document.getElementById("cadDocumentNfProduto").value,
         nroddd: document.getElementById("cadDddProduto").value,
@@ -41,11 +40,11 @@ function fnCadastrarProduto(){
 }
 
 const btnSalvar = document.getElementById("btnSalvarProduto")
-btnSalvar.addEventListener('click',() => {
+btnSalvar.addEventListener('click', () => {
     fnCadastrarProduto()
 })
 
-function fnEditarProduto(){
+function fnEditarProduto() {
     let formEditProduto = {
         equipamento: document.getElementById("").value,
         modelo: document.getElementById("").value,
@@ -71,3 +70,54 @@ function fnEditarProduto(){
 
     console.dir(formEditProduto)
 }
+
+function fnListarProdutos() {
+    fetch(`http://localhost:3000/produtos`, { method: "GET" })
+        .then(resultado => resultado.json())
+        .then((produtos) => {
+            produtos.forEach(produto => {
+                fnMontarTabelaProdutos(produto)
+            })
+        })
+}
+
+fnListarProdutos()
+
+// Preciso do Acesso no banco para fazer esse GET
+
+// function fnMontarTabelaProdutos(produto) {
+//     const tabela = ("corpo_tabProdutos")
+
+//     let linhaTabela =  `
+//     <tr>
+//         <td>${produto.equipamento}</td>
+//         <td>356789012345678</td>
+//         <td>000123</td>
+//         <td>Galaxy S23</td>
+//         <td>FAB-00123</td>
+//         <td>SN-987654321</td>
+//         <td>10/01/2026</td>
+//         <td>
+//         <span class="badge bg-success">Disponível</span>
+//         </td>
+//         <td>
+//         <div class="d-flex gap-2 justify-content-center">
+//         <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
+//         data-bs-target="#modalDetalhesProduto">
+//         <i class="bi bi-eye"></i>
+//         </button>
+//         <button data-bs-toggle="modal" data-bs-target="#modalEditarProduto"
+//         class="btn btn-warning btn-sm">
+//         <i class="bi bi-pencil-square"></i>
+//         </button>
+//         <button class="btn btn-danger btn-sm">
+//         <i class="bi bi-trash"></i>
+//         </button>
+//         <button class="btn btn-secondary btn-sm">
+//         <i class="bi bi-box-seam"></i>
+//         </button>
+//         </div>
+//         </td>
+//     </tr>
+//     `
+// }
