@@ -1,3 +1,43 @@
+function fnValidacaoBootstrap() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.validarForms')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+
+}
+
+const btnSalvar = document.getElementById("btnSalvarProduto")
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("formulario_cadProduto");
+
+    btnSalvar.addEventListener("click", () => {
+
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+        } else {
+            console.log("Login válido");
+            fnCadastrarProduto()
+            window.location.reload()
+        }
+
+    });
+
+});
+
 const modal = document.getElementById('modalProduto')
 modal.addEventListener('show.bs.modal', () => {
     console.log('ola')
@@ -38,11 +78,6 @@ function fnCadastrarProduto() {
 
     console.dir(formProduto)
 }
-
-const btnSalvar = document.getElementById("btnSalvarProduto")
-btnSalvar.addEventListener('click', () => {
-    fnCadastrarProduto()
-})
 
 function fnEditarProduto() {
     let formEditProduto = {

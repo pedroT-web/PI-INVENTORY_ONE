@@ -2,7 +2,6 @@ function fnLimparCampos() {
     document.getElementById("login").reset()
 }
 
-
 function fnLoginUsuario() {
     let formLoginUsuario = {
 

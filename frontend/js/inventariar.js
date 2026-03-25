@@ -1,3 +1,42 @@
+function fnValidacaoBootstrap() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.validarForms')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+
+}
+
+const btnInventariar = document.getElementById("botaoInventariar")
+document.addEventListener("DOMContentLoaded", () => {
+
+    const form = document.getElementById("form_inventariarProduto");
+
+    btnInventariar.addEventListener("click", () => {
+
+        if (!form.checkValidity()) {
+            form.classList.add("was-validated");
+            return;
+        } else {
+            console.log("Login válido");
+            fnInveriar()
+            window.location.reload()
+        }
+    });
+
+});
+
 function fnInveriar() {
     let formInventariar = {
         codigoPessoa: document.getElementById("txtCodigoPessoa").value,
@@ -20,7 +59,6 @@ function fnInveriar() {
     console.dir(formInventariar)
 }
 
-const btnInventariar = document.getElementById("botaoInventariar")
+// const btnInventariar = document.getElementById("botaoInventariar")
 btnInventariar.addEventListener("click", () => {
-    fnInveriar()
 })
