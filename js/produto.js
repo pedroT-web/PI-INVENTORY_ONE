@@ -25,16 +25,25 @@ function fnListarProdutos() {
 fnListarProdutos()
 
 function fnMontarLinhaProduto(produto) {
+    let produtoDisponivel = ""
+    if (produto.disponivel == "S") {
+        produtoDisponivel = "Disponivel"
+    } else {
+        produtoDisponivel = "Indisponivel"
+    }
+    
+    console.log(produto.dtaCompra)
+
     let linhaProduto = `
     <tr>
     <td>${produto.equipamento}</td>
     <td>${produto.imei}</td>
-    <td>${produto.nroDocumento}</td>
-    td>${produto.modelo}</td>
-    <td>${produto.imei}</td>
+    <td>${produto.nrodocumento}</td>
+    <td>${produto.modelo}</td>
+    <td>${produto.ean}</td>
     <td>${produto.serie}</td>
-    <td>${produto.dtaCompra}</td>
-    <td><span class="badge bg-success">${produto.disponivel}</span></td>
+    <td>${produto.dtacompra.split("T")[0]}</td>
+    <td><span class="badge bg-success">${produtoDisponivel}</span></td>
     <td>
                                         <div class="d-flex gap-2 justify-content-center">
                                             <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
