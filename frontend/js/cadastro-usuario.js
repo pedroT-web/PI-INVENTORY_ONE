@@ -4,13 +4,18 @@ function fnLimparCampos() {
 
 
 function fnCadastrarUsuario() {
+    const confirmSenha = document.getElementById("confirmaSenha").value
     let formCadUsuario = {
-
         nome: document.getElementById("campoNome").value,
         email: document.getElementById("campoEmail").value,
         senha: document.getElementById("campoSenha").value,
         telefone: document.getElementById("campoTelefone").value
     }
+
+        if (formCadUsuario.senha !== confirmSenha){
+            alert('As senhas não coincidem!');
+            return;
+        }
     console.dir(formCadUsuario)
 
     fetch('http://localhost:3000/cadastrousuarios/', {
@@ -18,7 +23,7 @@ function fnCadastrarUsuario() {
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify(formCadUsuario)
     })
-          .then(resposta => resposta.status())
+          .then(resposta => resposta.status)
         .then((dados) => {
             fnLimparCampos()
        

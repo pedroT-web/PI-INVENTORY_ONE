@@ -30,7 +30,7 @@ app.post("/cadastrousuarios/", async function (req, res) {
             if (erro) {
                 res.json(erro);
             }
-           
+           console.log(resultado)
         });
 })
 
