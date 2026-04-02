@@ -6,14 +6,14 @@ const app = express()
 const session = require('express-session')
 
 const bodyParser = require('body-parser')
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 const cors = require('cors')
 app.use(cors())
 app.use(express.json())
 
-const conexao = require("../banco_dados/db") 
+const conexao = require("../banco_dados/db")
 
 app.post("/pessoa/", function (req, res) {
     const data = req.body;
@@ -29,7 +29,7 @@ app.post("/pessoa/", function (req, res) {
 app.post("/produtos/", (req, res) => {
     const dados = req.body
     conexao.query("INSERT INTO produtos SET ?", [dados], (erro, resultado) => {
-        if(erro){
+        if (erro) {
             res.json(erro)
         }
         console.log("Deu Certo")
@@ -39,7 +39,7 @@ app.post("/produtos/", (req, res) => {
 
 app.get("/produtos", (req, res) => {
     conexao.query(`SELECT * FROM produtos`, (erro, listaProdutos) => {
-        if(erro){
+        if (erro) {
             console.log("Deu Errado")
         }
 
@@ -51,7 +51,7 @@ app.get("/produtos", (req, res) => {
 app.get("/produtos/:id", (req, res) => {
     const id = req.params.id
     conexao.query(`SELECT * FROM produtos WHERE id = ?`, [id], (erro, produto) => {
-        if(erro){
+        if (erro) {
             console.error(erro)
             return
         }
@@ -63,7 +63,7 @@ app.get("/produtos/:id", (req, res) => {
 app.delete("/produtos/:id", (req, res) => {
     const idProduto = req.params.id
     conexao.query(`DELETE FROM produtos WHERE id = ${idProduto}`, (erro, resultado) => {
-        if(erro){
+        if (erro) {
             console.error("ERRO AQUI:::::" + erro)
             return
         }
@@ -77,7 +77,7 @@ app.put("/produtos/:id", (req, res) => {
     const dados = req.body
 
     conexao.query(`UPDATE produtos SET ? WHERE id = ${idProduto}`, [dados], (erro, resultado) => {
-        if(erro){
+        if (erro) {
             console.error("ERRO AQUI::::::" + erro)
             return
         }
@@ -86,16 +86,43 @@ app.put("/produtos/:id", (req, res) => {
     })
 })
 
-app.get("/produtos/precificacao", (req, res) => {
+app.get("/produtos-precificacao", (req, res) => {
+    console.log("Resultado")
     conexao.query(`SELECT SUM(valor) AS soma FROM produtos`, (erro, resultado) => {
-        if(erro){
+        if (erro) {
             console.error("Erro Aqui::::" + erro)
             return
         }
-
+        console.log("Resultado")
+        console.dir(resultado)
         res.json(resultado)
     })
 })
+
+app.get("/inventarios", (req, res) => {
+    conexao.query(`SELECT pessoas.id,
+        pessoas.nome,
+        pessoas.telefone,
+        pessoas.filial,
+        produtos.id,
+        produtos.equipamento,
+        produtos.modelo,
+        produtos.serie,
+        produtos.nrolinha
+        FROM produtoDisponivel 
+        INNER JOIN pessoas ON produtoDisponivel.id_pessoa = pessoas.id 
+        INNER JOIN produtos ON produtoDisponivel.id_produto = produtos.id
+        `, (erro, lista_inventarios) => {
+        if (erro) {
+            console.error("Erro Aqui:::::" + erro)
+            return
+        }
+
+        res.send(lista_inventarios)
+    })
+})
+
+console.log("oi")
 
 app.listen(3000)
 app.use(session({
@@ -107,15 +134,13 @@ app.use(session({
 app.post('/login', (req, res) => {
     const { email, senha } = req.body
 
-    if(email === "" && senha == "" ){
-            req.session.usuario = {
-                email: email
-            }
+    if (email === "" && senha == "") {
+        req.session.usuario = {
+            email: email
+        }
 
-            return res.send("Login Realizado")
+        return res.send("Login Realizado")
     }
 
     res.status(401).send("Login inválido");
 })
-
-app.get('/')

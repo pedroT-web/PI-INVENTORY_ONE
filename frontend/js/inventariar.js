@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             console.log("Login válido");
             fnInveriar()
-            window.location.reload()
+            // window.location.reload()
         }
     });
 
@@ -57,8 +57,27 @@ function fnInveriar() {
         historico: document.getElementById("txtHistorico").value
     }
     console.dir(formInventariar)
+
+
 }
 
+function fnListarProduto() {
+    const params = new URLSearchParams(window.location.search)
+    const idProduto = params.get('idProduto')
+
+    fetch(`http://localhost:3000/produtos/${idProduto}`, { method: "GET" })
+        .then(resultado => resultado.json())
+        .then((dados) => {
+            fnPreencherCamposInventariar(dados)
+        })
+}
+
+function fnPreencherCamposInventariar(produto) {
+    document.getElementById("")
+}
+
+fnPreencherCamposInventariar()
+
 // const btnInventariar = document.getElementById("botaoInventariar")
-btnInventariar.addEventListener("click", () => {
-})
+// btnInventariar.addEventListener("click", () => {
+// })

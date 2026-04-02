@@ -35,7 +35,7 @@ app.post("/cadastrousuarios/", async function (req, res) {
 })
 
 
-app.post("/cadastropessoas/", function (req, res) {
+app.post("/pessoas/", function (req, res) {
     const data = req.body;
     conexao.query(`INSERT INTO pessoas set ?`, [data],
         function (erro, resultado) {

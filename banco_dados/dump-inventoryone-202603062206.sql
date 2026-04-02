@@ -134,3 +134,17 @@ UNLOCK TABLES;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
 -- Dump completed on 2026-03-06 22:06:11
+
+
+SELECT pessoas.id,
+        pessoas.nome,
+        pessoas.telefone,
+        pessoas.filial,
+        produtos.id,
+        produtos.equipamento,
+        produtos.modelo,
+        produtos.serie,
+        produtos.nrolinha
+        FROM produtoDisponivel 
+        INNER JOIN pessoas ON produtoDisponivel.id_pessoa = pessoas.id 
+        INNER JOIN produtos ON produtoDisponivel.id_produto = produtos.id
