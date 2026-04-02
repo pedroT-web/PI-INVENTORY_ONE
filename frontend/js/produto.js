@@ -29,15 +29,12 @@ function fnListarProdutos() {
 fnListarProdutos()
 
 function fnMontarLinhaProduto(produto) {
-
     let tipoDisponibilidade = "bg-success"
     let produtoDisponivel = "Disponivel"
     if (produto.disponivel != "S") {
         produtoDisponivel = "Indisponivel"
         tipoDisponibilidade = "bg-danger"
     }
-
-    console.log(produto.dtaCompra)
 
     let linhaProduto = `
     <tr>
@@ -50,24 +47,24 @@ function fnMontarLinhaProduto(produto) {
     <td>${produto.dtacompra.split("T")[0]}</td>
     <td><span class="badge ${tipoDisponibilidade}">${produtoDisponivel}</span></td>
     <td>
-                                        <div class="d-flex gap-2 justify-content-center">
-                                            <button class="btn btn-primary btn-sm botaoDetalhesProduto" data-bs-toggle="modal"
-                                                data-bs-target="#modalDetalhesProduto" data-id="${produto.id}">
-                                                <i class="bi bi-eye"></i>
-                                            </button>
-                                            <button data-bs-toggle="modal" data-bs-target="#modalEditarProduto" data-id="${produto.id}"
-                                                class="btn btn-warning btn-sm botaoEditarProduto">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </button>
-                                            <button class="btn btn-danger btn-sm botaoDeletarProduto" data-id="${produto.id}">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                            <a class="btn btn-secondary btn-sm" href="./inventariar.html?id=${produto.id}">
-                                                <i class="bi bi-box-seam"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    </tr>
+    <div class="d-flex gap-2 justify-content-center">
+    <button class="btn btn-primary btn-sm botaoDetalhesProduto" data-bs-toggle="modal"
+    data-bs-target="#modalDetalhesProduto" data-id="${produto.id}">
+    <i class="bi bi-eye"></i>
+    </button>
+    <button data-bs-toggle="modal" data-bs-target="#modalEditarProduto" data-id="${produto.id}"
+    class="btn btn-warning btn-sm botaoEditarProduto">
+    <i class="bi bi-pencil-square"></i>
+    </button>
+    <button class="btn btn-danger btn-sm botaoDeletarProduto" data-id="${produto.id}">
+    <i class="bi bi-trash"></i>
+    </button>
+    <a class="btn btn-secondary btn-sm botaoInventariarProduto" href="./inventariar.html?idProduto=${produto.id}">
+    <i class="bi bi-box-seam"></i>
+    </a>
+    </div>
+    </td>
+    </tr>
     `
 
     document.querySelector(".corpo_tabelaProdutos").innerHTML += linhaProduto
@@ -207,7 +204,7 @@ function fnPreencherModalDetalhes(produto) {
         tipoDisponibilidade = "bg-danger"
         disponivelDetalheProduto.classList.add(`${tipoDisponibilidade}`)
     }
-    
+
     disponivelDetalheProduto.innerText = produtoDisponivel
 
 

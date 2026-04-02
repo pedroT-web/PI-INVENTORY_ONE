@@ -4,7 +4,6 @@ function fnLimparCampos() {
 
 
 function fnCadastrarPessoa() {
-
     let formDados = {
         nome: document.getElementById("cadNomePessoa").value,
         endereco: document.getElementById("cadEnderecoPessoa").value,
@@ -19,7 +18,7 @@ function fnCadastrarPessoa() {
     }
 
       console.dir(formDados)
-      fetch('http://localhost:3000/cadastropessoas/', {
+      fetch('http://localhost:3000/pessoas/', {
         method: 'POST',
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify(formDados)
