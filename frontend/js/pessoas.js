@@ -1,3 +1,24 @@
+function fnValidacaoBootstrap() {
+    'use strict'
+
+    const forms = document.querySelectorAll('.validarForms')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+                form.classList.add('was-validated')
+                return
+            }
+
+            fnCadastrarPessoa()
+
+        }, false)
+    })
+
+}
+
 function fnLimparCampos() {
     document.getElementById("formCadPessoa").reset()
 }
@@ -17,8 +38,8 @@ function fnCadastrarPessoa() {
         email: document.getElementById("cadEmailPessoa").value
     }
 
-      console.dir(formDados)
-      fetch('http://localhost:3000/pessoas/', {
+    console.dir(formDados)
+    fetch('http://localhost:3000/pessoas/', {
         method: 'POST',
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify(formDados)
@@ -35,5 +56,5 @@ function fnCadastrarPessoa() {
 
 let btn_salvar = document.getElementById("salvarPessoa")
 btn_salvar.addEventListener("click", function () {
-    fnCadastrarPessoa()
+    fnValidacaoBootstrap()
 })

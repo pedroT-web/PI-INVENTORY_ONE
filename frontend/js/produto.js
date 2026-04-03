@@ -8,9 +8,11 @@ function fnValidacaoBootstrap() {
             if (!form.checkValidity()) {
                 event.preventDefault()
                 event.stopPropagation()
+                form.classList.add('was-validated')
+                return
             }
 
-            form.classList.add('was-validated')
+            fnCadastrarProduto()
         }, false)
     })
 
@@ -134,7 +136,6 @@ function fnCadastrarProduto() {
 const btnSalvar = document.getElementById("btnSalvarProduto")
 btnSalvar.addEventListener('click', () => {
     fnValidacaoBootstrap()
-    fnCadastrarProduto()
 })
 
 function fnPreencherModalEditProdutos(produto) {
