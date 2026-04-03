@@ -1,3 +1,22 @@
+function fnValidacaoBootstrap() {
+    'use strict'
+
+    const forms = document.querySelectorAll('.validarForms')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+
+}
+
+
 const modal = document.getElementById('modalProduto')
 modal.addEventListener('show.bs.modal', () => {
     console.log('ola')
@@ -114,6 +133,7 @@ function fnCadastrarProduto() {
 
 const btnSalvar = document.getElementById("btnSalvarProduto")
 btnSalvar.addEventListener('click', () => {
+    fnValidacaoBootstrap()
     fnCadastrarProduto()
 })
 

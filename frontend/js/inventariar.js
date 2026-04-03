@@ -21,20 +21,7 @@ function fnValidacaoBootstrap() {
 const btnInventariar = document.getElementById("botaoInventariar")
 document.addEventListener("DOMContentLoaded", () => {
 
-    const form = document.getElementById("form_inventariarProduto");
-
-    btnInventariar.addEventListener("click", () => {
-
-        if (!form.checkValidity()) {
-            form.classList.add("was-validated");
-            return;
-        } else {
-            console.log("Login válido");
-            fnInveriar()
-            // window.location.reload()
-        }
-    });
-
+    fnValidacaoBootstrap()
 });
 
 function fnInveriar() {

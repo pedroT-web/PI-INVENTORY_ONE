@@ -30,42 +30,59 @@
                         </div>
                         <div class="text-center mt-2">
                             <h1 class="text-center fs-3">Cadastro para Usuário</h1>
-                            <p class="text-body-tertiary fw-semibold text-center">Insira os dados abaixo, para solicitar
+                            <p class="text-body-tertiary fw-semibold text-center">Insira os dados abaixo, para
+                                solicitar
                                 seu login de acesso</p>
                         </div>
                     </div>
-                    <form id="cad-user" action="">
+                    <form class="validarForms" novalidate>
                         <div class="mb-3">
                             <label for="campoNome" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control formColor" id="campoNome">
+                            <input type="text" class="form-control" id="campoNome" required>
+                            <div class="invalid-feedback">
+                                Por favor, preencha este campo.
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="campoEmail" class="form-label">E-mail</label>
-                            <input type="email" class="form-control formColor" id="campoEmail">
+                            <input type="email" class="form-control" required id="campoEmail">
+                            <div class="invalid-feedback">
+                                Por favor, preencha este campo.
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="campoSenha" class="form-label">Senha</label>
-                                <input type="password" class="form-control formColor" id="campoSenha">
+                                <input type="password" class="form-control" required id="campoSenha">
+                                <div class="invalid-feedback">
+                                    Por favor, preencha este campo.
+                                </div>
                             </div>
                             <div class="col-6">
                                 <label for="confirmaSenha" class="form-label">Confirmar Senha</label>
-                                <input type="password" class="form-control formColor" id="confirmaSenha">
+                                <input type="password" class="form-control" required id="confirmaSenha">
+                                <div class="invalid-feedback">
+                                    Por favor, preencha este campo.
+
+                                </div>
                             </div>
                         </div>
                         <div class="mb-4">
                             <label for="campoTelefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control formColor" id="campoTelefone">
+                            <input type="text" class="form-control" required id="campoTelefone">
+                            <div class="invalid-feedback">
+                                Por favor, preencha este campo.
+                            </div>
                         </div>
                         <div class="text-center">
-                            <button type="button" class="botao-cadastro mb-3" id="cadastrar">Cadastrar</button>
-                        </div>
-                        <div class="text-center mb-3">
-                            <a class="text-decoration-none text-dark" href="login.html">já tem
-                                conta?
-                                <span class="text-azul-petroleo fw-bold">Login aqui.</span></a>
+                            <button type="submit" class="botao-cadastro mb-3" id="cadastrar">Cadastrar</button>
                         </div>
                     </form>
+                    <div class="text-center mb-3">
+                        <a class="text-decoration-none text-dark" href="login.html">já tem
+                            conta?
+                            <span class="text-azul-petroleo fw-bold">Login aqui.</span></a>
+                    </div>
                 </div>
             </div>
         </div>

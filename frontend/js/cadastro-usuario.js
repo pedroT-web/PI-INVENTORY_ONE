@@ -1,3 +1,22 @@
+function fnValidacaoBootstrap() {
+    'use strict'
+
+    const forms = document.querySelectorAll('.validarForms')
+
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+
+}
+
+
 function fnLimparCampos() {
     document.getElementById("cad-user").reset()
 }
@@ -12,10 +31,10 @@ function fnCadastrarUsuario() {
         telefone: document.getElementById("campoTelefone").value
     }
 
-        if (formCadUsuario.senha !== confirmSenha){
-            alert('As senhas não coincidem!');
-            return;
-        }
+    if (formCadUsuario.senha !== confirmSenha) {
+        alert('As senhas não coincidem!');
+        return;
+    }
     console.dir(formCadUsuario)
 
     fetch('http://localhost:3000/cadastrousuarios/', {
@@ -23,10 +42,10 @@ function fnCadastrarUsuario() {
         headers: { 'content-Type': 'application/json' },
         body: JSON.stringify(formCadUsuario)
     })
-          .then(resposta => resposta.status)
+        .then(resposta => resposta.status)
         .then((dados) => {
             fnLimparCampos()
-       
+
             console.log(dados)
 
         })
@@ -37,6 +56,6 @@ function fnCadastrarUsuario() {
 let btn_salvar = document.getElementById("cadastrar")
 
 btn_salvar.addEventListener("click", function () {
+    fnValidacaoBootstrap()
     fnCadastrarUsuario()
-
 })

@@ -100,11 +100,12 @@ app.get("/produtos-precificacao", (req, res) => {
 })
 
 app.get("/inventarios", (req, res) => {
-    conexao.query(`SELECT pessoas.id,
+    conexao.query(`SELECT produtoDisponivel.id as idInventario, 
+        pessoas.id as idPesso,
         pessoas.nome,
         pessoas.telefone,
         pessoas.filial,
-        produtos.id,
+        produtos.id as idProduto,
         produtos.equipamento,
         produtos.modelo,
         produtos.serie,
