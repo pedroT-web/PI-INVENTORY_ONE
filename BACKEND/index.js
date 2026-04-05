@@ -16,7 +16,7 @@ async function geraHash(senha) {
     const salts = 12;
     const senhaHash = await bcrypt.hash(senha, salts);
     return senhaHash;
-    
+
 }
 const conexao = require('../banco_dados/db.js')
 
@@ -30,9 +30,32 @@ app.post("/cadastrousuarios/", async function (req, res) {
             if (erro) {
                 res.json(erro);
             }
-           console.log(resultado)
+            console.log(resultado)
+            res.json({ sucesso: true });
+
         });
 })
+
+
+// ia
+// app.post("/cadastrousuarios/", async function (req, res) {
+//     try {
+//         const data = req.body;
+//         const senhaCriptografada = await geraHash(data.senha);
+//         data.senha = senhaCriptografada;
+
+//         conexao.query(`INSERT INTO usuarios SET ?`, [data], function (erro, resultado) {
+//             if (erro) {
+//                 console.error('Erro INSERT:', erro);
+//                 return res.status(400).json({ erro: erro.message });  // Erro com status
+//             }
+//             console.log('Inserido:', resultado);
+//             res.status(201).json({ sucesso: true, id: resultado.insertId });  // <--- SUCESSO!
+//         });
+//     } catch (err) {
+//         res.status(500).json({ erro: err.message });
+//     }
+// });
 
 
 app.post("/cadastropessoas/", function (req, res) {
@@ -42,7 +65,7 @@ app.post("/cadastropessoas/", function (req, res) {
             if (erro) {
                 res.json(erro);
             }
-           
+
         });
 })
 
