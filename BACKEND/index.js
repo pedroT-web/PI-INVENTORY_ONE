@@ -58,27 +58,6 @@ app.post("/login/", function (req, res) {
     })
 })
 
-// ia
-// app.post("/cadastrousuarios/", async function (req, res) {
-//     try {
-//         const data = req.body;
-//         const senhaCriptografada = await geraHash(data.senha);
-//         data.senha = senhaCriptografada;
-
-//         conexao.query(`INSERT INTO usuarios SET ?`, [data], function (erro, resultado) {
-//             if (erro) {
-//                 console.error('Erro INSERT:', erro);
-//                 return res.status(400).json({ erro: erro.message });  // Erro com status
-//             }
-//             console.log('Inserido:', resultado);
-//             res.status(201).json({ sucesso: true, id: resultado.insertId });  // <--- SUCESSO!
-//         });
-//     } catch (err) {
-//         res.status(500).json({ erro: err.message });
-//     }
-// });
-
-
 app.post("/cadastropessoas/", function (req, res) {
     const data = req.body;
     conexao.query(`INSERT INTO pessoas set ?`, [data],
@@ -90,5 +69,111 @@ app.post("/cadastropessoas/", function (req, res) {
         });
 })
 
+app.post("/pessoa/", function (req, res) {
+    const data = req.body;
+    conexao.query(`INSERT INTO pessoas set ?`, [data],
+        function (erro, resultado) {
+            if (erro) {
+                res.json(erro);
+            }
+            res.send(resultado.insertId());
+        });
+})
+
+app.post("/produtos/", (req, res) => {
+    const dados = req.body
+    conexao.query("INSERT INTO produtos SET ?", [dados], (erro, resultado) => {
+        if (erro) {
+            res.json(erro)
+        }
+        console.log("Deu Certo")
+        // res.send(resultado.insertId())
+    })
+})
+
+app.get("/produtos", (req, res) => {
+    conexao.query(`SELECT * FROM produtos`, (erro, listaProdutos) => {
+        if (erro) {
+            console.log("Deu Errado")
+        }
+
+        res.send(listaProdutos)
+        console.log("Deu Certo")
+    })
+})
+
+app.get("/produtos/:id", (req, res) => {
+    const id = req.params.id
+    conexao.query(`SELECT * FROM produtos WHERE id = ?`, [id], (erro, produto) => {
+        if (erro) {
+            console.error(erro)
+            return
+        }
+
+        res.send(produto)
+    })
+})
+
+app.delete("/produtos/:id", (req, res) => {
+    const idProduto = req.params.id
+    conexao.query(`DELETE FROM produtos WHERE id = ${idProduto}`, (erro, resultado) => {
+        if (erro) {
+            console.error("ERRO AQUI:::::" + erro)
+            return
+        }
+
+        res.send(resultado)
+    })
+})
+
+app.put("/produtos/:id", (req, res) => {
+    const idProduto = req.params.id
+    const dados = req.body
+
+    conexao.query(`UPDATE produtos SET ? WHERE id = ${idProduto}`, [dados], (erro, resultado) => {
+        if (erro) {
+            console.error("ERRO AQUI::::::" + erro)
+            return
+        }
+
+        console.log(resultado)
+    })
+})
+
+app.get("/produtos-precificacao", (req, res) => {
+    console.log("Resultado")
+    conexao.query(`SELECT SUM(valor) AS soma FROM produtos`, (erro, resultado) => {
+        if (erro) {
+            console.error("Erro Aqui::::" + erro)
+            return
+        }
+        console.log("Resultado")
+        console.dir(resultado)
+        res.json(resultado)
+    })
+})
+
+app.get("/inventarios", (req, res) => {
+    conexao.query(`SELECT pessoas.id,
+        pessoas.nome,
+        pessoas.telefone,
+        pessoas.filial,
+        produtos.id,
+        produtos.equipamento,
+        produtos.modelo,
+        produtos.serie,
+        produtos.nrolinha
+        FROM produtoDisponivel 
+        INNER JOIN pessoas ON produtoDisponivel.id_pessoa = pessoas.id 
+        INNER JOIN produtos ON produtoDisponivel.id_produto = produtos.id
+        `, (erro, lista_inventarios) => {
+        if (erro) {
+            console.error("Erro Aqui:::::" + erro)
+            return
+        }
+
+        res.send(lista_inventarios)
+    })
+})
 
 app.listen(3000)

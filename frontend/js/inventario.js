@@ -32,9 +32,6 @@ function fnCriarLinhasInventario(inventario) {
                     data-bs-target="#modalDetalhesProduto" data-id="${inventario.id}">
                     <i class="bi bi-eye"></i>
                     </button>
-                    <a class="btn btn-secondary btn-sm" href="./inventariar.html?id=${inventario.idInventario}">
-                    <i class="bi bi-box-seam"></i>
-                    </a>
                 </div>
             </td>
         </tr>

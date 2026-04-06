@@ -16,7 +16,9 @@ function fnValidacaoBootstrap() {
                 return
             }
 
-            fnCadastrarProduto()
+            else {
+                fnCadastrarProduto()
+            }
         }, false)
     })
 
