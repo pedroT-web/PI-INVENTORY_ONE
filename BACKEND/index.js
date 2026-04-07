@@ -58,16 +58,7 @@ app.post("/login/", function (req, res) {
     })
 })
 
-app.post("/cadastropessoas/", function (req, res) {
-    const data = req.body;
-    conexao.query(`INSERT INTO pessoas set ?`, [data],
-        function (erro, resultado) {
-            if (erro) {
-                res.json(erro);
-            }
 
-        });
-})
 
 app.post("/pessoas/", function (req, res) {
 
@@ -82,6 +73,42 @@ app.post("/pessoas/", function (req, res) {
             res.json({ sucesso: true });
 
         });
+})
+
+app.get("/pessoas", (req, res) => {
+    conexao.query(`SELECT * FROM pessoas`, (erro, listaPessoas) => {
+        if (erro) {
+            console.log("Deu Errado")
+        }
+
+        res.send(listaPessoas)
+        console.log("Deu Certo Pessoas")
+    })
+})
+
+
+app.get("/pessoas/:id", (req, res) => {
+    const id = req.params.id
+    conexao.query(`SELECT * FROM pessoas WHERE id = ?`, [id], (erro, pessoa) => {
+        if (erro) {
+            console.error(erro)
+            return
+        }
+
+        res.send(pessoa)
+    })
+})
+
+app.delete("/pessoas/:id", (req, res) => {
+    const idPessoa = req.params.id
+    conexao.query(`DELETE FROM pessoas WHERE id = ${idPessoa}`, (erro, resultado) => {
+        if (erro) {
+            console.error("ERRO AQUI:::::" + erro)
+            return
+        }
+
+        res.send(resultado)
+    })
 })
 
 
@@ -103,7 +130,7 @@ app.get("/produtos", (req, res) => {
         }
 
         res.send(listaProdutos)
-        console.log("Deu Certo")
+        console.log("Deu Certo Produtos")
     })
 })
 

@@ -72,12 +72,20 @@
                 <section class="bg-white border p-2 rounded">
                     <header>
                         <nav class="navbar">
-                            <div class="container-fluid">
-                                <a class="navbar-brand"><i class="bi bi-person-raised-hand"></i> Cadastro de
-                                    Pessoas</a>
-                                <button class="btn btn-warning w-sm-100" type="submit" data-bs-toggle="modal"
-                                    data-bs-target="#modalCadPessoa"> <i class="bi bi-person-plus"></i>
-                                    Cadastrar Pessoa</button>
+                            <div class="container-fluid d-flex justify-content-between align-items-center">
+                                <div class="col-md-8">
+                                    <h1 class="navbar-brand">
+                                        <i class="bi bi-person-raised-hand"></i> Cadastro de Pessoas
+                                    </h1>
+                                    <p class="font-body-3 text-body-tertiary">
+                                        Aqui você pode visualizar, cadastrar, editar e remover pessoas.
+                                    </p>
+                                </div>
+
+                                <button class="btn btn-warning" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#modalCadPessoa">
+                                    <i class="bi bi-person-plus"></i> Cadastrar Pessoa
+                                </button>
                             </div>
                         </nav>
                     </header>
@@ -87,43 +95,42 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col"><i class="bi bi-123 text-muted"></i> Cód. Func</th>
+                                <th scope="col"><i class="bi bi-123 text-muted"></i> Cód.Pessoa</th>
                                 <th scope="col"><i class="bi bi-people-fill text-muted"></i> Nome</th>
-                                <th scope="col"><i class="bi bi-people-fill text-muted"></i> Endereço</th>
+                                <th scope="col"><i class="bi bi-building-fill text-muted"></i> Filial</th>
+                                <th scope="col"><i class="bi bi-people-fill text-muted"></i> Cargo</th>
                                 <th scope="col"><i class="bi bi-person-vcard-fill text-muted"></i> Departamento</th>
-                                <th scope="col"><i class="bi bi-building-fill text-muted"></i> Empresa</th>
-                                <th scope="col"><i class="bi bi-graph-up-arrow text-muted"></i> Status</th>
+                                <!-- <th scope="col"><i class="bi bi-graph-up-arrow text-muted"></i> Status</th> -->
                                 <th scope="col"><i class="bi bi-gear-fill text-muted"></i>Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-
-                                <td>101</td>
-                                <td>Ana Silva</td>
-                                <td>Rua Pal. Fran.</td>
-                                <td>Vendas Internas</td>
-                                <td>Alpha Tech</td>
-                                <td>
-                                    <span class="badge bg-success-subtle text-success fw-semibold">Ativo</span>
-                                </td>
-                                <td>
-                                    <button class="btn btn-sm btn-outline-primary btn-action-icon" title="Ver Detalhes"
-                                        data-bs-toggle="modal" data-bs-target="#modalDetalhesPessoa">
-                                        <i class="bi bi-eye"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger btn-action-icon" title="Excluir">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-warning btn-action-icon" title="Editar"
-                                        data-bs-toggle="modal" data-bs-target="#modalEditarPessoa">
-                                        <i class="bi bi-pen"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <tbody class="corpo_tabelaPessoas">
+                            <!-- Exemplo de linha — replique via JS ao popular a tabela -->
+                            <!-- <tr>
+                <td>001</td>
+                <td>João Silva</td>
+                <td>Rua X, 123</td>
+                <td>TI</td>
+                <td>Empresa Y</td>
+                <td>Ativo</td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-outline-primary btn-action-icon" title="Ver Detalhes"
+                        data-bs-toggle="modal" data-bs-target="#modalDetalhesPessoa">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning btn-action-icon" title="Editar"
+                        data-bs-toggle="modal" data-bs-target="#modalEditarPessoa">
+                        <i class="bi bi-pen"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger btn-action-icon" title="Excluir">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </td>
+            </tr> -->
                         </tbody>
                     </table>
                 </section>
+
             </section>
         </div>
     </main>
@@ -136,7 +143,7 @@
 
                 <div class="modal-header border-0 pb-0 px-4">
                     <div>
-                        <h5 class="modal-title fw-bold" id="modalProdutoLabel">
+                        <h5 class="modal-title fw-bold" id="modalPessoaLabel">
                             <i class="bi bi-person-fill me-2"></i>
                             Cadastro de Pessoa
                         </h5>
@@ -153,7 +160,7 @@
 
                         <h6 class="fw-semibold text-primary mb-3">Informações da Pessoa</h6>
                         <div class="row g-3 mb-4">
-                             <div class="col-md-2">
+                            <div class="col-md-2">
                                 <label class="form-label">Cod Pessoa <i
                                         class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
                                 <input type="text" class="form-control" id="cadCodPessoa" required>
@@ -277,13 +284,13 @@
     </div>
 
     <div class="modal fade" id="modalDetalhesPessoa" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="modalDetalhesProdutoLabel" aria-hidden="true">
+        aria-labelledby="modalDetalhesPessoaLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
             <div class="modal-content rounded-4 shadow">
 
                 <div class="modal-header border-0 pb-0 px-4">
                     <div>
-                        <h5 class="modal-title fw-bold" id="modalDetalhesProdutoLabel">
+                        <h5 class="modal-title fw-bold" id="modalDetalhesPessoaLabel">
                             <i class="bi bi-info-circle me-2"></i>
                             Detalhes da Pessoa
                         </h5>
@@ -299,73 +306,73 @@
                         <div class="col-md-6">
                             <label class="form-label">Nome da Pessoa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesNomePesso" disabled
-                                value="Murilo Brevagneli">
+                            <input type="text" class="form-control" id="detalhesNomePessoa" disabled>
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Endereço <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesEnderecoPessoa" disabled
-                                value="Rua São João Gonçalo, 192, Jd das Orquídeas">
+                            <input type="text" class="form-control" id="detalhesEnderecoPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Cep <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesCepPessoa" disabled value="18297362">
+                            <input type="text" class="form-control" id="detalhesCepPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Departamento <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesDepartamentoPessoa" disabled value="TI">
+                            <input type="text" class="form-control" id="detalhesDepartamentoPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Empresa <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesFilialPessoa" disabled value="Pulmer">
+                            <input type="text" class="form-control" id="detalhesFilialPessoa" disabled>
                         </div>
 
-                        <div class="col-md-4 mt-4">
+                        <!-- <div class="col-md-4 mt-4">
                             <label class="form-label">Status <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesStatusPessoa" disabled
-                                value="Na empresa">
-                        </div>
+                            <input type="text" class="form-control" id="detalhesStatusPessoa" disabled>
+                        </div> -->
 
                         <div class="col-md-4 mt-4">
-                            <label class="form-label">Data de Nascimento <i
+                            <label class="form-label">Data Nasc. <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesNascimentoPessoa" disabled
-                                value="23/02/2000">
+                            <input type="text" class="form-control" id="detalhesNascimentoPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Sexo <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input class="form-control" id="detalhesSelectSexoPessoa" disabled value="Masculino">
+                            <input class="form-control" id="detalhesSelectSexoPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Cargo <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="text" class="form-control" id="detalhesCargoPessoa" disabled value="Gerente">
+                            <input type="text" class="form-control" id="detalhesCargoPessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Telefone <i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="number" class="form-control" id="detalhesTelefonePessoa" disabled
-                                value="19998472372">
+                            <input type="number" class="form-control" id="detalhesTelefonePessoa" disabled>
                         </div>
 
                         <div class="col-md-4 mt-4">
                             <label class="form-label">Email<i
                                     class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
-                            <input type="email" class="form-control" id="detalhesEmailPessoa" disabled
-                                value="murilo@gmail.com">
+                            <input type="email" class="form-control" id="detalhesEmailPessoa" disabled>
+                        </div>
+
+                        <div class="col-md-4 mt-4">
+                            <label class="form-label">Cod.Pessoa<i
+                                    class="bi bi-exclamation-circle text-secondary ms-1"></i></label>
+                            <input type="email" class="form-control" id="detalhescodPessoa" disabled>
                         </div>
 
                     </div>
@@ -534,6 +541,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../js/pessoas.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
