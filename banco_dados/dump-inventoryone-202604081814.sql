@@ -1,9 +1,9 @@
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19-11.7.2-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: inventoryone
+-- Host: modeninventory.ddns.net    Database: inventoryone
 -- ------------------------------------------------------
--- Server version	10.4.32-MariaDB
+-- Server version	10.11.13-MariaDB-0ubuntu0.24.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,20 +25,22 @@ DROP TABLE IF EXISTS `pessoas`;
 /*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pessoas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(30) NOT NULL,
+  `nome` varchar(50) NOT NULL,
   `nascimento` date DEFAULT NULL,
   `sexo` enum('M','F') DEFAULT NULL,
   `nacionalidade` varchar(20) DEFAULT 'Brasil',
   `cargo` varchar(30) DEFAULT NULL,
   `departamento` varchar(30) DEFAULT NULL,
   `filial` varchar(30) DEFAULT NULL,
-  `telefone` int(12) DEFAULT NULL,
+  `telefone` varchar(15) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `endereco` varchar(512) DEFAULT NULL,
-  `cep` int(8) DEFAULT NULL,
+  `cep` varchar(11) DEFAULT NULL,
   `dtacadastro` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `codPessoa` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codPessoa` (`codPessoa`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +49,41 @@ CREATE TABLE `pessoas` (
 
 LOCK TABLES `pessoas` WRITE;
 /*!40000 ALTER TABLE `pessoas` DISABLE KEYS */;
+INSERT INTO `pessoas` VALUES
+(29,'Roberto Bagio','1990-01-22','M','Brasil','Comprador','Compras','Hortolandia','1932321212','rbagio@gmail.com','Rua do Estádio Brinco de Ouro','13120122','2026-04-08 13:21:18',123),
+(30,'Joana Shadow','1993-03-21','F','Brasil','Lider','Logistica','Marilia','123323123','joanas@pop','Rua da Luz 57','00001233','2026-04-08 13:48:00',334),
+(32,'Paulo Rodrigues','1990-03-12','M','Brasil','Auxiliar','Financeiro','Jaboticabal','12332123123','prodruigue@gmail','Av. Josue de Oliveira 1000, americana SP','13423232','2026-04-08 14:03:45',444);
 /*!40000 ALTER TABLE `pessoas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `produtoDisponivel`
+--
+
+DROP TABLE IF EXISTS `produtoDisponivel`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `produtoDisponivel` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_pessoa` int(11) NOT NULL,
+  `id_produto` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_pessoa` (`id_pessoa`),
+  KEY `id_produto` (`id_produto`),
+  CONSTRAINT `produtoDisponivel_ibfk_1` FOREIGN KEY (`id_pessoa`) REFERENCES `pessoas` (`id`),
+  CONSTRAINT `produtoDisponivel_ibfk_2` FOREIGN KEY (`id_produto`) REFERENCES `produtos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produtoDisponivel`
+--
+
+LOCK TABLES `produtoDisponivel` WRITE;
+/*!40000 ALTER TABLE `produtoDisponivel` DISABLE KEYS */;
+INSERT INTO `produtoDisponivel` VALUES
+(39,29,33);
+/*!40000 ALTER TABLE `produtoDisponivel` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -79,9 +115,10 @@ CREATE TABLE `produtos` (
   `historico` longtext DEFAULT NULL,
   `ean` int(14) DEFAULT NULL,
   `alugado` enum('S','N') DEFAULT NULL,
-  `disponivel` enum('S','N') DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `disponivel` enum('S','N') DEFAULT 'S',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `imei` (`imei`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +127,11 @@ CREATE TABLE `produtos` (
 
 LOCK TABLES `produtos` WRITE;
 /*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
+INSERT INTO `produtos` VALUES
+(33,'Notebook','Inspiron','Dell','Processador i18 128GB Ram 20TB NVME ','4321',1234,'2026-04-30','2026-04-08 14:05:03',12300001.00,111134,NULL,NULL,NULL,NULL,NULL,'RIbeirao Preto - T.i','Joaquin Pereira',NULL,7890,'N','N'),
+(34,'celular','Inspiron','Dell','Processador i18 128GB Ram 20TB NVME ','1234',4321,'2026-04-30','2026-04-08 17:55:38',12300001.00,111134,NULL,NULL,NULL,'',NULL,'RIbeirao Preto - T.i','Joaquin Pereira',NULL,7890,'N','S'),
+(35,'Notebook','Inspiron','Dell','Processador i18 128GB Ram 20TB NVME ','5564',883721,'2026-04-30','2026-04-08 13:16:19',12300001.00,772263,NULL,NULL,NULL,NULL,NULL,'Hortolândia - Comercial','Beatriz Musk',NULL,7890,'N','S'),
+(36,'Celular','S50k','MUND','128GB Ram 12TB Armazenamento 9.8GHZ BiCore','1234',123312,'1985-02-20','2026-04-08 17:54:59',12525987.12,12,NULL,NULL,NULL,NULL,NULL,'Pirassununga Comercial','Dorival',NULL,789122,'N','S');
 /*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,8 +149,9 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) DEFAULT NULL,
   `telefone` varchar(15) DEFAULT NULL,
   `dtacadastro` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_usuarios_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +160,8 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES
+(3,'Murilo','murilo@gmail','$2b$12$neMBHgiJoCxoFW0No7sqKOlg0GlEDD0jB3MFM5lQfHiy7rfdE8N/q','123456742234234','2026-04-08 12:40:02');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,18 +178,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
 
--- Dump completed on 2026-03-06 22:06:11
-
-
-SELECT pessoas.id,
-        pessoas.nome,
-        pessoas.telefone,
-        pessoas.filial,
-        produtos.id,
-        produtos.equipamento,
-        produtos.modelo,
-        produtos.serie,
-        produtos.nrolinha
-        FROM produtoDisponivel 
-        INNER JOIN pessoas ON produtoDisponivel.id_pessoa = pessoas.id 
-        INNER JOIN produtos ON produtoDisponivel.id_produto = produtos.id
+-- Dump completed on 2026-04-08 18:14:10
