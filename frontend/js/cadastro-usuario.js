@@ -50,7 +50,7 @@ function fnCadastrarUsuario() {
         return;
     }
 
-    fetch('https://pi-inventory-one-fvwa.onrender.com/cadastrousuarios/', {
+    fetch('http://localhost:3000/cadastrousuarios/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formCadUsuario)
